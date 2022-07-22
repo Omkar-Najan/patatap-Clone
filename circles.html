@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Patatap Clone</title>
+    <script type="text/javascript" src="./paper-full.js"></script>
+
+    <script type="text/paperscript" canvas="myCanvas">
+        
+    function onKeyDown(event) {
+
+	    // When a key is pressed, set the content of the text item:
+        // to select random points in canvas to create circle. 
+        
+        var maxPoint = new Point(view.size.width, view.size.height)
+        var randomPoint = Point.random();  // gives random point from 0 to 1. 
+        
+        var point = maxPoint * randomPoint;
+        new Path.Circle(point, 10).fillColor = 'orange'; // now with random cirlce. 
+
+
+
+
+
+    }
+     
+
+    </script>
+</head>
+<body>
+    
+
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>
