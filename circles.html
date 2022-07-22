@@ -6,33 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Patatap Clone</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="./paper-full.js"></script>
 
     <script type="text/paperscript" canvas="myCanvas">
+
+        var sound = new Howl({
+            src: ['sounds/bubbles.mp3']
+          });
     
         var circles =[]
-    function onKeyDown(event) {
+        function onKeyDown(event) {
+            
+            sound.play();
 
-	    // When a key is pressed, set the content of the text item:
-        // to select random points in canvas to create circle. 
+            // When a key is pressed, set the content of the text item:
+            // to select random points in canvas to create circle. 
+            
+            var maxPoint = new Point(view.size.width, view.size.height)
+            var randomPoint = Point.random();  // gives random point from 0 to 1. 
+            
+            var point = maxPoint * randomPoint;
+            var newCircle = new Path.Circle(point, 200);
+            newCircle.fillColor = 'orange';
+            circles.push(newCircle); // now with random cirlce.
+
+
+        }    
+        function onFrame(event){
+
+            for(var i =0; i<circles.length;i++){
+                circles[i].fillColor.hue += 2; // fillColor.hue changes color of circle.
+                circles[i].scale(0.9);         // scale changes size of circle.
+            }       
+        }
         
-        var maxPoint = new Point(view.size.width, view.size.height)
-        var randomPoint = Point.random();  // gives random point from 0 to 1. 
-        
-        var point = maxPoint * randomPoint;
-        var newCircle = new Path.Circle(point, 100);
-        newCircle.fillColor = 'orange';
-        circles.push(newCircle); // now with random cirlce. 
-
-    }    
-    function onFrame(event){
-
-        for(var i =0; i<circles.length;i++){
-            circles[i].fillColor.hue += 1; // fillColor.hue changes color of circle.
-            circles[i].scale(0.9);         // scale changes size of circle.
-        }       
-    }
-     
 
 
     </script>
